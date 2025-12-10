@@ -27,12 +27,12 @@ def request_data():
 
 def register_log(status: str, time: str):
     
-    with open("log.json", "a") as l:
+    with open("log.json", "a") as log:
         line = [
                 {"nome": os.getlogin()}, 
                 {"hora": time}, 
                 {"status": status}
                 ]
-        l.write(line)
+        json.dump(line, log)
 if __name__ == "__main__":
     request_data()
