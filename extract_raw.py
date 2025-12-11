@@ -14,7 +14,7 @@ def src_to_raw(src_path: str, months: int, year:int) -> None:
                     MONTH(data_conv) = {i}
                     AND
                     YEAR(data_conv) = {year}
-                ) TO {config.DOLAR_PATH}{i:02.0f}-{year}.json"
+                ) TO "{config.DOLAR_PATH}{i:02.0f}-{year}.json"
                 ''')
 
     logging.info("RAW atualziado")
