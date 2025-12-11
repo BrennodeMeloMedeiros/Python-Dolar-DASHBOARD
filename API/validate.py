@@ -1,7 +1,7 @@
 import os
 
-def today_data_exists(DIR: str) -> bool:
-    if os.path.isfile(DIR):
+def today_file_exists(dir: str) -> bool:
+    if os.path.isfile(dir):
         return True
     else:
         return False 
