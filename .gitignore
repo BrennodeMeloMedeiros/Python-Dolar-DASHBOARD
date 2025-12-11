@@ -1,3 +1,6 @@
 a.ipynb
 data/bronze/dolar*
 data/raw/dolar*
+
+!data/bronze/dolar
+!data/raw/dolar
