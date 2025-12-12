@@ -15,9 +15,11 @@
 ## Métricas
 
  - Métricas Diárias
- -- Rentabilidade Diária
- -- Variação da Média Mensal
+ -- Média diária
+ -- Variação diária bruta
+ -- Variação diária em percentual
 
  - Métricas Mensals
- -- Rentabilidade Mensal
- -- Variação da Média Anual
+ -- Média mensal
+ -- Variação mensal bruta
+ -- Variação mensal em percentual

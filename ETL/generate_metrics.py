@@ -8,6 +8,7 @@ def generate_daily_metrics() -> None:
                 COPY(SELECT 
                     DATA,
                     VALOR,
+                    MONTH(DATA) AS MES,
                     ROUND(VALOR - LAG(VALOR) OVER (ORDER BY data),2) AS variacao_diaria_bruto, 
                     ROUND((variacao_diaria_bruto / LAG(VALOR) OVER (ORDER BY DATA)),2) AS variacao_diaria_perc
                 FROM read_csv_auto("data/bronze/dolar/dolar_2025.csv", 
@@ -47,3 +48,5 @@ def generate_monthly_metrics() -> None:
                 ) TO "data/analytics/monthly_metrics.csv"
                
                ''')
+
+generate_daily_metrics()

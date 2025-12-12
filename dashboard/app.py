@@ -78,7 +78,7 @@ app.layout = html.Div(
                         "Variação média mensal Bruta",
                         html.Div(className="label", children=[brute_monthly_variation])
                             ]     
-                    )
+                    )gi
                     ,html.Div(
                     className="box",
                     children=[
