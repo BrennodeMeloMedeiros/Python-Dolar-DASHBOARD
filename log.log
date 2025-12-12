@@ -18,3 +18,18 @@
 2025-12-12 08:04:51,184 - INFO - Requisicao bem sucedida
 2025-12-12 08:04:51,267 - INFO - RAW atualizado
 2025-12-12 08:04:51,336 - INFO - FIM de execucao
+2025-12-12 10:31:19,484 - INFO - INICIO de execucao
+2025-12-12 10:31:19,484 - INFO - Requisicao API dispensada
+2025-12-12 10:31:19,554 - INFO - RAW atualizado
+2025-12-12 10:32:02,415 - INFO - INICIO de execucao
+2025-12-12 10:32:02,415 - INFO - Requisicao API dispensada
+2025-12-12 10:32:02,474 - INFO - RAW atualizado
+2025-12-12 10:32:03,084 - INFO - Dash is running on http://127.0.0.1:8050/
+
+2025-12-12 10:32:24,681 - INFO - FIM de execucao
+2025-12-12 10:32:26,386 - INFO - INICIO de execucao
+2025-12-12 10:32:26,386 - INFO - Requisicao API dispensada
+2025-12-12 10:32:26,441 - INFO - RAW atualizado
+2025-12-12 10:32:27,062 - INFO - Dash is running on http://127.0.0.1:8050/
+
+2025-12-12 10:32:43,450 - INFO - FIM de execucao

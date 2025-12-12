@@ -6,6 +6,8 @@ from API.save_file import save_as_json
 from ETL.extract_raw import src_to_raw
 from ETL.raw_to_bronze import raw_to_bronze
 from ETL.generate_metrics import generate_daily_metrics, generate_monthly_metrics
+from dashboard.app import start_app
+
 logging.basicConfig(filename='log.log', level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s') 
 
 def main():
@@ -25,6 +27,7 @@ def main():
     generate_monthly_metrics()
     generate_daily_metrics()
 
+    start_app()
 
 
     logging.info("FIM de execucao")
