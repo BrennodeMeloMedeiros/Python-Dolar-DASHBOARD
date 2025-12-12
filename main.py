@@ -3,8 +3,9 @@ import logging
 from API.request import request_data
 from API.validate import today_file_exists
 from API.save_file import save_as_json
-from extract.extract_raw import src_to_raw
-from extract.raw_to_bronze import raw_to_bronze
+from ETL.extract_raw import src_to_raw
+from ETL.raw_to_bronze import raw_to_bronze
+from ETL.generate_metrics import generate_daily_metrics, generate_monthly_metrics
 logging.basicConfig(filename='log.log', level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s') 
 
 def main():
@@ -20,6 +21,10 @@ def main():
 
     src_to_raw(today_src_file, months = 12, year = 2025)
     raw_to_bronze()
+
+    generate_monthly_metrics()
+    generate_daily_metrics()
+
 
 
     logging.info("FIM de execucao")

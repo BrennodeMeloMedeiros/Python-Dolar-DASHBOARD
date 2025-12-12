@@ -2,7 +2,7 @@ import duckdb
 import config
 
 def raw_to_bronze() -> None:
-    df = duckdb.sql(f'''
+    duckdb.sql(f'''
         COPY(    
         WITH temp AS (
             SELECT DISTINCT * FROM read_json("data/raw/dolar/*.json")                    

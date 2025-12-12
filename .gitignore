@@ -1,6 +1,8 @@
 a.ipynb
 data/bronze/dolar/*
 data/raw/dolar/*
+analytics/*
 
 !data/bronze/dolar
 !data/raw/dolar
+!analytics/
