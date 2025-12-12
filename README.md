@@ -17,7 +17,7 @@
 ## Como rodar
 1. Abra a pasta em seu cmd
 2. No caminho raiz, execute o comando abaixo:
-   '''bash
+   '''
     python main.py
    '''
 3. Aproveite =D
