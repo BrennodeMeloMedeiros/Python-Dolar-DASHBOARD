@@ -2,6 +2,7 @@ a.ipynb
 data/bronze/dolar/*
 data/raw/dolar/*
 analytics/*
+.venv
 
 !data/bronze/dolar
 !data/raw/dolar
