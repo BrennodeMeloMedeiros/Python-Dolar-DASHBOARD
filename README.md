@@ -10,17 +10,21 @@
 1. Certifique-se de que tem o Python 3.9.9 instalado
 2. Clone o projeto
 3. Crie e ative um ambiente virtual:
-4. python -m venv .venv
-5. .venv\Scripts\activate
-6. pip install -r requirements.txt
+   
+   ```
+   python -m venv .venv
+   .venv\Scripts\activate
+   pip install -r requirements.txt
+   ```
 
 ## Como rodar
 1. Abra a pasta em seu cmd
 2. No caminho raiz, execute o comando abaixo:
-   '''
-    python main.py
-   '''
-3. Aproveite =D
+   ```
+   python main.py
+   ```
+
+1. Aproveite =D
 
 ## Justificativa Métricas
 - Valor médio ANUAL
