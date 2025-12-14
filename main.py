@@ -29,7 +29,6 @@ def main():
 
     start_app()
 
-
     logging.info("FIM de execucao")
 if __name__ == "__main__":
     main()

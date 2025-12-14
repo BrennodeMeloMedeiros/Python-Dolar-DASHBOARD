@@ -3,7 +3,7 @@ from dash.dependencies import Input, Output
 import webbrowser
 import duckdb
 import plotly.graph_objects as go
-
+from dashboard.querys import *
 
 def start_app():
     app = Dash()
@@ -23,35 +23,7 @@ def start_app():
             {'label': 'Novembro', 'value': 11},
             {'label': 'Dezembro', 'value': 12},
         ]
-    avg_value = duckdb.sql('''
-                        SELECT ROUND(AVG(VALOR),2) 
-                        FROM read_csv_auto("data/analytics/daily_metrics.csv")
-                        ''').fetchall()[0][0]
-
-    brute_daily_variation = duckdb.sql('''
-                        SELECT ROUND(AVG(variacao_diaria_bruto),4) 
-                        FROM read_csv_auto("data/analytics/daily_metrics.csv")
-                        ''').fetchall()[0][0]
-    if brute_daily_variation < 0:
-        brute_daily_variation = f"-R${brute_daily_variation * -1}"
-        
-    perc_daily_variation = duckdb.sql('''
-                        SELECT ROUND(AVG(variacao_diaria_perc),4) 
-                        FROM read_csv_auto("data/analytics/daily_metrics.csv")
-                        ''').fetchall()[0][0]
-
-    brute_monthly_variation = duckdb.sql('''
-                        SELECT ROUND(AVG(variacao_mensal_bruto),4) 
-                        FROM read_csv_auto("data/analytics/monthly_metrics.csv")
-                        ''').fetchall()[0][0]
-    if brute_monthly_variation < 0:
-        brute_monthly_variation = f"-R${brute_monthly_variation * -1}"
-
-    perc_monthly_variation = duckdb.sql('''
-                        SELECT ROUND(AVG(variacao_mensal_perc),4) 
-                        FROM read_csv_auto("data/analytics/monthly_metrics.csv")
-                        ''').fetchall()[0][0]
-
+   
     app.layout = html.Div(
         className="body",
         children=[
@@ -113,9 +85,12 @@ def start_app():
         Output("grafico", "figure"),
         Input("dropdown","value")
     )
-    def refresh_graph(month):
-        print(f"MES ========= {month}")
-        if month == 0:
+    def refresh_graph(int_month):
+        
+        dictGraphLayout = dict(mode="line")
+
+
+        if int_month == 0:
             q = '''
             SELECT STRFTIME(MIN(DATA), '%B') as MES_NOME, ROUND(AVG(VALOR),2) 
             FROM read_csv_auto("data/analytics/daily_metrics.csv") GROUP BY MES ORDER BY MES
@@ -126,11 +101,15 @@ def start_app():
             x = [r[0] for r in rows]
             y = [r[1] for r in rows]
 
+            dictGraphLayout = dict(title="Variação Mensal",
+                                   xaxis=dict(title='Mês',
+                                            tickmode='linear'))
+
         else:
             q = f'''
             SELECT DAY(DATA), VALOR 
             FROM read_csv_auto("data/analytics/daily_metrics.csv") 
-            WHERE  MES = {month} 
+            WHERE  MES = {int_month} 
                 
             ORDER BY DATA
             '''
@@ -138,25 +117,24 @@ def start_app():
 
             x = [r[0] for r in rows]
             y = [r[1] for r in rows]
-        print(x)
+
+            dictGraphLayout = dict(title=f"Variação Diária em {months_dropmenu[int_month]['label']}", 
+                                   xaxis=dict(title="Dias"))
+
         fig = go.Figure(
             data = go.Scatter(
                 x = x,
                 y = y,
                 mode="lines"
-            )
+            ),
+            layout = go.Layout(dictGraphLayout)
         )
 
-        if month == 0:
-            fig.update_layout(
-                xaxis_title = "Mês",
-                yaxis_title = "Valor Dolar"
-            )
-        else:
-            fig.update_layout(
-                xaxis_title = "Dia",
-                yaxis_title = "Valor Dolar"
-            )
+        fig.update_layout(
+            xaxis_tickmode = "linear"
+        )
         return fig
+    
+
     webbrowser.open("http://127.0.0.1:8050")
     app.run(debug=True, use_reloader = False)
