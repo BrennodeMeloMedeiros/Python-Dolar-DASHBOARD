@@ -89,13 +89,20 @@ def start_app():
         
         dictGraphLayout = dict(mode="line")
 
-
-        if int_month == 0:
-            q = '''
+        query_daily = '''
             SELECT STRFTIME(MIN(DATA), '%B') as MES_NOME, ROUND(AVG(VALOR),2) 
             FROM read_csv_auto("data/analytics/daily_metrics.csv") GROUP BY MES ORDER BY MES
             '''
+        query_monthly = f'''
+            SELECT DAY(DATA), VALOR 
+            FROM read_csv_auto("data/analytics/daily_metrics.csv") 
+            WHERE  MES = {int_month} 
+                
+            ORDER BY DATA
+            '''
 
+        if int_month == 0:
+            q = query_daily
             rows = duckdb.sql(q).fetchall()
 
             x = [r[0] for r in rows]
@@ -104,22 +111,16 @@ def start_app():
             dictGraphLayout = dict(title="Variação Mensal",
                                    xaxis=dict(title='Mês',
                                             tickmode='linear'))
-
         else:
-            q = f'''
-            SELECT DAY(DATA), VALOR 
-            FROM read_csv_auto("data/analytics/daily_metrics.csv") 
-            WHERE  MES = {int_month} 
-                
-            ORDER BY DATA
-            '''
-            rows = duckdb.sql(q).fetchall()
-
-            x = [r[0] for r in rows]
-            y = [r[1] for r in rows]
-
+            q = query_monthly
             dictGraphLayout = dict(title=f"Variação Diária em {months_dropmenu[int_month]['label']}", 
                                    xaxis=dict(title="Dias"))
+
+
+        rows = duckdb.sql(q).fetchall()
+
+        x = [r[0] for r in rows]
+        y = [r[1] for r in rows]
 
         fig = go.Figure(
             data = go.Scatter(
